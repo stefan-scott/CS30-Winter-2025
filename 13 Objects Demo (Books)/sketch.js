@@ -23,7 +23,7 @@ function setup() {
   
    bookshelf.push(new Book("A", "Mr. Booth",
    1111111111, covers[choice], 200, x));
-   x += 20;
+   x += 20; 
  }
  
   myBook = new Book("CS30 Text", "Mr. Scott",
