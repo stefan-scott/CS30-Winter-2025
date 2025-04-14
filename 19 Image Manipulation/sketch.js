@@ -10,6 +10,7 @@ function preload() {
 
 function setup() {
   createCanvas(pilot.width, pilot.height);
+  pixelDensity(1);
 }
 
 function setPixelColor(pos, r, g, b) {
