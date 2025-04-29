@@ -14,7 +14,6 @@ function draw() {
   //cantor(width*0.1, height*0.3, width*0.8, 9);
 }
 
-
 function circleFractal(x,y,d){
   noFill();
   if(d > 1){
