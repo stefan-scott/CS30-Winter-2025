@@ -11,10 +11,16 @@ function setup() {
 
 function draw() {
   background(220);
+
+  if(mouseIsPressed){
+    objects.push(new Ball(mouseX, mouseY));
+  }
+
   for (let o of objects){
-    if(keyIsPressed && key === " "){
+    //if(keyIsPressed && key === " "){
       o.move();
-    }
+    //}
+    //o.calcMouse();
     o.display();
   }
 
@@ -23,14 +29,32 @@ function draw() {
 class Ball{
   constructor(x,y){
     this.pos = createVector(x,y);
-    this.vel = createVector(5,-5);
-    this.grav = createVector(0,0.1);
+    this.vel = createVector(random(-5,5),-5);
+    this.grav = createVector(0,0.2);
+    //this.grav; //MOUSE ATTRACTOR
+  }
+
+  calcMouse(){
+    //mouse vector calculations
+    this.grav = createVector(mouseX, mouseY);
+    this.grav.sub(this.pos);
+    this.grav.normalize(); //sets between 0-1
+    this.grav.mult(4);
   }
 
   move(){
     //update velocity and position vectors
     this.vel.add(this.grav);
+    this.vel.limit(30);  //can't go outside -10 and 10
     this.pos.add(this.vel);
+
+    //wall-floor bounce
+    if(this.pos.x < 0 || this.pos.x > width){
+      this.vel.x *= -1;
+    }
+    if(this.pos.y > height){
+      this.vel.y *= -1;
+    }
   }
   
   display(){
@@ -38,16 +62,16 @@ class Ball{
     circle(this.pos.x, this.pos.y, 20);
 
     //display vectors
-    stroke(255,0,0);
-    line(0,0,this.pos.x, this.pos.y);
+    // stroke(255,0,0);
+    // line(0,0,this.pos.x, this.pos.y);
 
-    stroke(0,0,255);
-    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x, this.pos.y + this.vel.y);
+    // stroke(0,0,255);
+    // line(this.pos.x, this.pos.y, this.pos.x + this.vel.x, this.pos.y + this.vel.y);
 
-    let endVX = this.pos.x + this.vel.x;
-    let endVY = this.pos.y + this.vel.y;
-    stroke(0,255,0);
-    line(endVX, endVY, endVX + this.grav.x, endVY + this.grav.y);
+    // let endVX = this.pos.x + this.vel.x;
+    // let endVY = this.pos.y + this.vel.y;
+    // stroke(0,255,0);
+    // line(endVX, endVY, endVX + this.grav.x, endVY + this.grav.y);
 
   }
 
