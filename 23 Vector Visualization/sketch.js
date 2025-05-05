@@ -11,6 +11,13 @@ function setup() {
 
 function draw() {
   background(220);
+  for (let o of objects){
+    if(keyIsPressed && key === " "){
+      o.move();
+    }
+    o.display();
+  }
+
 }
 
 class Ball{
@@ -28,9 +35,20 @@ class Ball{
   
   display(){
     //display Ball
-    circle(pos.x, pos.y, 20);
+    circle(this.pos.x, this.pos.y, 20);
 
     //display vectors
+    stroke(255,0,0);
+    line(0,0,this.pos.x, this.pos.y);
+
+    stroke(0,0,255);
+    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x, this.pos.y + this.vel.y);
+
+    let endVX = this.pos.x + this.vel.x;
+    let endVY = this.pos.y + this.vel.y;
+    stroke(0,255,0);
+    line(endVX, endVY, endVX + this.grav.x, endVY + this.grav.y);
+
   }
 
 }
