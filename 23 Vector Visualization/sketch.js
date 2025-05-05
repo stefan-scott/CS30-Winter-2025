@@ -2,8 +2,11 @@
 // Mr. Scott
 // May 5, 2025
 
+let objects = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  objects.push(new Ball(width*0.1, height*0.5));
 }
 
 function draw() {
