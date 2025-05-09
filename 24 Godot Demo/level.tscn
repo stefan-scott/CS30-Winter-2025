@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://6glbdlv342ph"]
+
+[ext_resource type="PackedScene" uid="uid://csg8avlk5icpe" path="res://player.tscn" id="1_u52ul"]
+[ext_resource type="Texture2D" uid="uid://3juevp7wvxow" path="res://PixelSpaceRage/PixelBackgroundSeamless.png" id="2_vonw3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonw3"]
+size = Vector2(99, 720)
+
+[node name="Level" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(582, 331)
+scale = Vector2(4.52344, 2.57813)
+texture = ExtResource("2_vonw3")
+
+[node name="Player" parent="." instance=ExtResource("1_u52ul")]
+position = Vector2(572, 317)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-44, 338)
+shape = SubResource("RectangleShape2D_vonw3")
